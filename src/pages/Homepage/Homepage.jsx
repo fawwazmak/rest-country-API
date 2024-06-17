@@ -8,15 +8,18 @@ import Countries from "../../component/countries/Countries";
 
 const Homepage = () => {
   let [theme, setTheme] = useState("light");
+  let [searchAndFilterSelect, setSearchAndFilterSelect] = useState("Nigeria")
 
   const toggleTheme = () => {
     setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+    console.log(searchAndFilterSelect);
   };
 
   useEffect(() => {
     document.body.className = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
+  console.log()
 
   return (
     <>
@@ -44,8 +47,9 @@ const Homepage = () => {
           Mode
         </Button>
       </div>
-      <SearchAndFilterSelect theme={theme} />
-      <Countries theme={theme} />
+      {/* inputValue, setInputValue */}
+      <SearchAndFilterSelect theme={theme} inputValue={searchAndFilterSelect} setInputValue={setSearchAndFilterSelect}  />
+      <Countries theme={theme} searchedCountry={searchAndFilterSelect} />
     </>
   );
 };

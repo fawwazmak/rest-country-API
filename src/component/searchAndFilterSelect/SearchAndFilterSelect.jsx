@@ -6,6 +6,7 @@ const SearchAndFilterSelect = ({ theme, inputValue, setInputValue}) => {
   // const searchedCntry = () => {
     const changeValue = (e) => {
       setInputValue(e.target.value)
+      console.log(inputValue)
     }
   // } 
   return (
@@ -19,7 +20,7 @@ const SearchAndFilterSelect = ({ theme, inputValue, setInputValue}) => {
           }
         >
           <CiSearch />
-          <input type="text" value={inputValue} placeholder="Search for a country" className={theme === "light" ? "bg-light text-dark" : "bg-dark text-light"}
+          <input type="text" onChange={changeValue} placeholder="Search for a country" className={theme === "light" ? "bg-light text-dark" : "bg-dark text-light"}
           />
         </div>
 
