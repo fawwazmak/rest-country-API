@@ -1,36 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
 import { CiSearch } from "react-icons/ci";
 
-const SearchAndFilterSelect = ({ theme, inputValue, setInputValue}) => {
-  // const searchedCntry = () => {
-    const changeValue = (e) => {
-      setInputValue(e.target.value)
-      console.log(inputValue)
-    }
-  // } 
+const SearchAndFilterSelect = ({
+  theme,
+  countriesArray,
+  setcountriesArray,
+  searchedCountry,
+  setsearchedCountry,
+  setCountryRegion,
+  countryRegion,
+}) => {
+  const changeCountryValue = (e) => {
+    setsearchedCountry(e.target.value);
+    axios
+      .get("https://restcountries.com/v3.1/all#")
+      .then((res) => {
+        setcountriesArray(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const changeRegion = (event) => {
+    setCountryRegion(event.target.value);
+  };
   return (
     <>
-      <div className="d-flex justify-content-between mt-3 flex-sm-row flex-column">
+      <div className="d-flex justify-content-between mt-3 flex-sm-row flex-column px-md-5 px-2 gap-3 py-2">
         <div
-          className={
-            theme === "light"
-              ? "bg-white text-dark rounded-1"
-              : "bg-dark text-light rounded-1"
-          }
+          className={`rounded-1 p-2 d-flex align-items-center gap-2 ${
+            theme === "light" ? "bg-on-light" : "bg-on-dark"
+          }`}
         >
           <CiSearch />
-          <input type="text" onChange={changeValue} placeholder="Search for a country" className={theme === "light" ? "bg-light text-dark" : "bg-dark text-light"}
+          <input
+            type="text"
+            onChange={changeCountryValue}
+            placeholder="Search for a country"
+            className={`w-100 ${
+              theme === "light" ? "bg-on-light" : "bg-on-dark"
+            }`}
           />
         </div>
 
-        <Form.Select size="sm" className="fw-bolder" style={{ width: "180px" }}>
-          <option>Filter by Region</option>
-          <option>Africa</option>
-          <option>America</option>
-          <option>Asia</option>
-          <option>Europe</option>
-          <option>Oceania</option>
+        <Form.Select
+          size="sm"
+          value={countryRegion}
+          onChange={changeRegion}
+          className={`fw-bolder ${
+            theme === "light" ? "bg-on-light" : "bg-on-dark"
+          }`}
+          style={{ width: "180px" }}
+        >
+          <option value="">Filter by Region</option>
+          <option value="Africa">Africa</option>
+          <option value="America">America</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
         </Form.Select>
       </div>
     </>

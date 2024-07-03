@@ -8,9 +8,6 @@ function App() {
 
   return (
     <>
-      <p className="position-absolute bg-info fw-bolder fs-1 end-50 bottom-0">
-        Still working on this project!!
-      </p>
       <Homepage />
     </>
   );

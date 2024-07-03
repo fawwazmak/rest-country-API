@@ -1,55 +1,69 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
-import { FaMoon } from "react-icons/fa6";
-import { FaSun } from "react-icons/fa6";
+import { IoMdMoon } from "react-icons/io";
+import { GoSun } from "react-icons/go";
 import SearchAndFilterSelect from "../../component/searchAndFilterSelect/SearchAndFilterSelect";
 import Countries from "../../component/countries/Countries";
 
 const Homepage = () => {
-  let [theme, setTheme] = useState("light");
-  let [searchAndFilterSelect, setSearchAndFilterSelect] = useState("Nigeria")
+  let [theme, setTheme] = useState("dark");
+  const [countriesArray, setcountriesArray] = useState([]);
+  const [searchedCountry, setsearchedCountry] = useState(null);
+  const [countryRegion, setCountryRegion] = useState("");
 
   const toggleTheme = () => {
     setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
-    console.log(searchAndFilterSelect);
   };
 
   useEffect(() => {
     document.body.className = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
-  console.log()
 
   return (
     <>
       <div
-        className="d-flex flex-sm-row flex-column-reverse justify-content-between align-items-center px-5 py-3"
-        style={{ boxShadow: "1px 1px 10px black" }}
+        className={`d-flex justify-content-between align-items-center px-md-5 px-2 py-3 ${
+          theme === "light" ? "bg-on-light" : "bg-on-dark"
+        }`}
       >
-        <p className="fw-bolder mt-sm-0 mt-4 ">Where in the world? </p>
-        <Button
-          className={
-            theme === "light" ? "bg-light text-dark " : "bg-dark text-light"
-          }
+        <p className="fw-bold mt-sm-0">Where in the world? </p>
+        <p
+          className={`d-flex align-items-center gap-1 ${
+            theme === "light" ? "bg-on-light" : "bg-on-dark"
+          }`}
           onClick={toggleTheme}
         >
-          {" "}
           {theme === "light" ? (
             <>
-              <FaMoon /> Dark
+              <IoMdMoon /> Dark
             </>
           ) : (
             <>
-              <FaSun /> Light
+              <GoSun /> Light
             </>
           )}{" "}
           Mode
-        </Button>
+        </p>
       </div>
-      {/* inputValue, setInputValue */}
-      <SearchAndFilterSelect theme={theme} inputValue={searchAndFilterSelect} setInputValue={setSearchAndFilterSelect}  />
-      <Countries theme={theme} searchedCountry={searchAndFilterSelect} />
+
+      <SearchAndFilterSelect
+        theme={theme}
+        countriesArray={countriesArray}
+        setcountriesArray={setcountriesArray}
+        searchedCountry={searchedCountry}
+        setsearchedCountry={setsearchedCountry}
+        countryRegion={countryRegion}
+        setCountryRegion={setCountryRegion}
+      />
+
+      <Countries
+        theme={theme}
+        countriesArray={countriesArray}
+        searchedCountry={searchedCountry}
+        countryRegion={countryRegion}
+      />
     </>
   );
 };
