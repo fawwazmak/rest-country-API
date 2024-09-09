@@ -34,6 +34,10 @@ select:focus {
   box-shadow: none;
 }
 
+.main-container {
+  column-gap: 10px;
+}
+
 /*
 - Very Dark Blue (Light Mode Text): 
 - Dark Gray (Light Mode Input): hsl(0, 0%, 52%)
