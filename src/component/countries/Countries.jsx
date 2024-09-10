@@ -57,7 +57,7 @@ const Countries = ({ theme, countriesArray, searchedCountry, countryRegion }) =>
                   {/* <img src={country.flags.svg} alt={`${country.name.common} Flag`} /> */}
               </div>
               <div>
-                {/* <h1>{country.name.common}</h1> */}
+                {/* <h1>{country.name.common}</h1>  alright */}
 
                 <div className="d-flex justify-content-between">
                   <div>
