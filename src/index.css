@@ -34,9 +34,14 @@ select:focus {
   box-shadow: none;
 }
 
-.main-container {
-  column-gap: 10px;
+.custom-col {
+  margin-bottom: 25px;
 }
+
+.custom-col > div {
+  margin-right: 25px;
+}
+
 
 /*
 - Very Dark Blue (Light Mode Text): 
